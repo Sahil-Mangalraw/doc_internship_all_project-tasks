@@ -1,0 +1,160 @@
+1. Docker Case Studies
+Explore how companies like Netflix, Spotify, PayPal, and Uber use Docker in their infrastructure. These companies rely on Docker for:
+
+Fast and consistent deployments
+
+Efficient use of system resources
+
+Scalable microservice architecture
+
+Simplified CI/CD pipelines
+
+🟢 Example: PayPal used Docker to reduce deployment time from 45 minutes to under 1 minute.
+
+2. Run Tools/Technologies in Docker
+Try running any software (e.g., Python script, Node.js app, MySQL database) inside a Docker container.
+
+Create a Dockerfile
+
+Define the environment and dependencies
+
+Build and run the container
+
+🟢 Benefit: Avoids "It works on my machine" problems.
+
+3. Apache in Docker
+Set up an Apache web server inside Docker:
+
+Use an official httpd image
+
+Mount a local index.html to /usr/local/apache2/htdocs/
+
+Expose port 80
+
+bash
+Copy code
+docker run -dit --name my-apache -p 8080:80 httpd
+🟢 Use this for quick static website hosting.
+
+4. Run systemctl in Docker
+systemctl requires systemd, which isn’t natively supported in Docker. Workaround:
+
+Use --privileged mode
+
+Use centos/systemd or similar images
+
+Use docker run --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro IMAGE_NAME
+
+🟢 Helps simulate real Linux environments in Docker.
+
+5. Run GUI Applications in Docker
+Use tools like X11 forwarding, VNC, or Xpra:
+
+bash
+Copy code
+xhost +local:docker
+docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix app-image
+🟢 Run applications like Firefox, Gedit, etc., from Docker.
+
+6. Access Sound Card in Docker
+Grant audio access by:
+
+Mounting /dev/snd device
+
+Using PulseAudio socket
+
+bash
+Copy code
+docker run --device /dev/snd your-image
+🟢 Allows media or voice-based applications to work inside containers.
+
+7. Docker in Docker (DIND)
+Run Docker inside Docker for CI/CD tools like Jenkins:
+
+bash
+Copy code
+docker run --privileged -d docker:dind
+🟢 Used in GitLab CI/CD pipelines and containerized DevOps workflows.
+
+8. Take Photo in JavaScript
+Use the navigator.mediaDevices.getUserMedia() API to access the webcam and take a snapshot via <canvas>.
+
+🟢 Useful in browser-based verification or KYC apps.
+
+9. Send Email with JavaScript or API
+Frontend alone can’t send emails. Use:
+
+EmailJS (direct from JS without backend)
+
+Backend APIs (Node.js/Flask + SMTP or Mailgun/SendGrid)
+
+🟢 Enables contact forms or alerts from frontend apps.
+
+10. Send Captured Photo via Email
+After capturing the photo:
+
+Convert image to Base64 or Blob
+
+Use EmailJS or backend API to send the image as an attachment
+
+🟢 Used in ID verification or surveillance tools.
+
+11. Record Video and Send via Email
+Use MediaRecorder API to record video on button click
+
+Save as Blob and send using an API backend or service like EmailJS (with storage)
+
+🟢 Use-case: customer support, complaints, evidence collection
+
+12. Send WhatsApp Message in JavaScript
+Use https://wa.me/<number>?text=message URL scheme
+
+Or use Twilio WhatsApp API (backend setup required)
+
+🟢 Enables businesses to start WhatsApp conversations from websites.
+
+13. Run Linear Regression in Docker
+Write a Python script using sklearn
+
+Dockerize it using a Dockerfile
+
+Run the container with required dataset mounted
+
+🟢 Reproducible ML experiments in isolated environments.
+
+14. Flask App in Docker
+Write a simple Flask app
+
+Create a Dockerfile
+
+Expose port and run
+
+dockerfile
+Copy code
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip install flask
+CMD ["python", "app.py"]
+🟢 Makes ML/AI web demos easy to deploy.
+
+15. Menu-Based Python Project in Docker
+Build any terminal-based CLI tool (e.g., task manager)
+
+Add to Docker image
+
+Use CMD ["python3", "main.py"] in Dockerfile
+
+🟢 CLI projects become portable and sharable as Docker images.
+
+16. Firefox in Docker
+Use X11 forwarding or VNC
+
+Install Firefox inside a container
+
+bash
+Copy code
+apt-get install firefox -y
+Run with display forwarding
+
+🟢 Ideal for running browsers in isolated or test environments.
